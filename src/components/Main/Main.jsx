@@ -1,83 +1,69 @@
-import { useContext } from "react"; // Importing useContext hook from React
-import "./Main.css"; // Importing CSS file for styling
-import { assets } from "../../assets/assets"; // Importing assets (images/icons)
-import { Context } from "../../context/Context"; // Importing the context
+import React from "react";
+import "./Main.css";
+import { assets } from "../../assets/assets";
+import { Context } from "../../context/Context";
+import "react-tooltip/dist/react-tooltip.css";
+import { Tooltip } from "react-tooltip";
 
 const Main = () => {
   const {
-    onSent, // Function to send input
-    recentPrompt, // The most recent prompt entered
-    showResult, // Boolean to show result or not
-    loading, // Loading state
-    resultData, // Data to display as result
-    setInput, // Function to set the input state
-    input, // Current input value
-  } = useContext(Context); // Destructuring values from Context
-
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      onSent(); // Call onSent function when Enter key is pressed
-    }
-  };
-
+    onSent,
+    recentPrompt,
+    showResult,
+    loadingState,
+    loading,
+    resultData,
+    setInput,
+    input,
+  } = React.useContext(Context);
   return (
     <div className="main">
       <div className="nav">
-        <div className="social">
-          <a
-            href="https://github.com/StarKnightt/GeminiAIClone"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src={assets.github_icon}
-              alt="GitHub"
-              style={{ width: "44px", height: "44px" }}
-            />
-          </a>
-        </div>
         <p>Gemini</p>
-        <img src={assets.user_icon} alt="" />
+        <a target="_blank" href="https://accounts.google.com/">
+          <img src={assets.user_icon} alt="" />
+        </a>
       </div>
       <div className="main-container">
-        {!showResult ? ( // Check if showResult is false
+        {!showResult ? (
           <>
             <div className="greet">
               <p>
-                <span>Hello, Developer.</span>
+                <span>Hello, Priyanshu</span>
               </p>
               <p>How can I help you today?</p>
             </div>
-
             <div className="cards">
               <div className="card">
-                <p>Is HTML a programming Language, Explain it!</p>
-                <img src={assets.compass_icon} alt="" />
-              </div>
-              <div className="card">
-                <p>What are some necessary skills to improve yourself?</p>
+                <p>Draft an email with a packing list for an upcoming trip</p>
                 <img src={assets.bulb_icon} alt="" />
               </div>
               <div className="card">
-                <p>Brainstorm team bonding activities for our work retreat</p>
-                <img src={assets.message_icon} alt="" />
+                <p>Explain the following code step-by-step in detail</p>
+                <img src={assets.code_icon} alt="" />
               </div>
               <div className="card">
-                <p>Add some comments to the following code</p>
-                <img src={assets.code_icon} alt="" />
+                <p>Help me get organized with a list of 10 tips</p>
+                <img src={assets.compass_icon} alt="" />
+              </div>
+              <div className="card">
+                <p>Create an image & bedtime story</p>
+                <img src={assets.image_icon} alt="" />
               </div>
             </div>
           </>
         ) : (
-          // If showResult is true
           <div className="result">
             <div className="result-title">
               <img src={assets.user_icon} alt="" />
-              <p>{recentPrompt}</p> {/* Display the recent prompt */}
+              <p>{recentPrompt}</p>
             </div>
             <div className="result-data">
-              <img src={assets.gemini_icon} alt="" />
-              {loading ? ( // Check if loading is true
+              <img
+                src={loading ? assets.gemini_gif : assets.gemini_icon}
+                alt=""
+              />
+              {loading ? (
                 <div className="loader">
                   <hr />
                   <hr />
@@ -85,9 +71,8 @@ const Main = () => {
                 </div>
               ) : (
                 <p
-                  dangerouslySetInnerHTML={{
-                    __html: resultData, // Display the result data
-                  }}
+                  style={{ marginTop: "0px" }}
+                  dangerouslySetInnerHTML={{ __html: resultData }}
                 ></p>
               )}
             </div>
@@ -97,27 +82,73 @@ const Main = () => {
         <div className="main-bottom">
           <div className="search-box">
             <input
-              onChange={(e) => setInput(e.target.value)} // Update input value on change
+              onKeyDown={(e) => {
+                if (input && e.key === "Enter") {
+                  onSent();
+                }
+              }}
+              onChange={(e) => {
+                setInput(e.target.value);
+              }}
               value={input}
               type="text"
               placeholder="Enter a prompt here"
-              onKeyDown={handleKeyDown} // Handle key down event
             />
             <div>
-              <img src={assets.gallery_icon} alt="" />
-              <img src={assets.mic_icon} alt="" />
-              {input ? ( // Check if input is not empty
+              <span>
                 <img
-                  onClick={() => onSent()} // Call onSent function on click
-                  src={assets.send_icon}
+                  src={assets.gallery_icon}
                   alt=""
+                  data-tooltip-id="upload-image"
+                  data-tooltip-content="Upload image"
                 />
-              ) : null}
+                <Tooltip
+                  id="upload-image"
+                  style={{ padding: "5px", fontSize: "12px", color: "#f0f4f9" }}
+                />
+              </span>
+              <span>
+                {" "}
+                <img
+                  src={assets.mic_icon}
+                  alt=""
+                  data-tooltip-id="use-microphone"
+                  data-tooltip-content="Use microphone"
+                />
+                <Tooltip
+                  id="use-microphone"
+                  style={{ padding: "5px", fontSize: "12px", color: "#f0f4f9" }}
+                />
+              </span>
+              {input.length > 0 && (
+                <span className={`send-icon ${input.length > 0 ? "show" : ""}`}>
+                  <img
+                    onClick={() => {
+                      onSent();
+                    }}
+                    src={assets.send_icon}
+                    alt=""
+                    data-tooltip-id="submit"
+                    data-tooltip-content="Submit"
+                  />
+                  <Tooltip
+                    id="submit"
+                    style={{
+                      padding: "5px",
+                      fontSize: "12px",
+                      color: "#f0f4f9",
+                    }}
+                  />
+                </span>
+              )}
             </div>
           </div>
           <p className="bottom-info">
             Gemini may display inaccurate info, including about people, so
-            double-check its responses. Your Privacy and Gemini Apps
+            double-check its responses.{" "}
+            <a href="https://support.google.com/gemini?p=privacy_notice">
+              Your privacy and Gemini Apps
+            </a>
           </p>
         </div>
       </div>
@@ -125,4 +156,4 @@ const Main = () => {
   );
 };
 
-export default Main; // Export Main component as default
+export default Main;

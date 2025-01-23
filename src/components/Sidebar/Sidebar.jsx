@@ -1,66 +1,90 @@
-import "./Sidebar.css"; // Importing CSS file for styling
-import { useContext, useState } from "react"; // Importing useContext and useState hooks from React
-import { assets } from "../../assets/assets"; // Importing assets (images/icons)
-import { Context } from "../../context/Context"; // Importing the context
-
+import React from "react";
+import "./Sidebar.css";
+import { assets } from "../../assets/assets";
+import { Context } from "../../context/Context";
+import { Tooltip } from "react-tooltip";
 const Sidebar = () => {
-  const [extended, setExtended] = useState(false); // State to track if sidebar is extended
-  const { onSent, prevPrompts, setRecentPrompt, newChat } = useContext(Context); // Destructuring values from Context
-
+  const [extended, setExtended] = React.useState(true);
+  const { onSent, prevPrompts, setRecentPrompt, newChat } =
+    React.useContext(Context);
   const loadPrompt = async (prompt) => {
-    setRecentPrompt(prompt); // Set the recent prompt
-    await onSent(prompt); // Call onSent function with the prompt
+    setRecentPrompt(prompt);
+    await onSent(prompt);
   };
-
+  let sidebarWidth;
+  if (!extended) {
+    sidebarWidth = "20%";
+  } else {
+    sidebarWidth = "70px";
+  }
   return (
-    <div className="sidebar">
+    <div className="sidebar" style={{ width: sidebarWidth }}>
       <div className="top">
         <img
-          onClick={() => setExtended((prev) => !prev)} // Toggle sidebar extended state
+          onClick={() => {
+            setExtended(!extended);
+          }}
           className="menu"
           src={assets.menu_icon}
-          alt="Menu Icon"
+          alt=""
+          data-tooltip-id="menu"
+          data-tooltip-content={extended ? "Expand" : "Collapse"}
         />
-        <div onClick={() => newChat()} className="new-chat">
-          <img src={assets.plus_icon} alt="Plus Icon" />
-          {extended ? <p>New Chat</p> : null}{" "}
-          {/* Show 'New Chat' text if extended */}
+        <Tooltip
+          id="menu"
+          place={"bottom"}
+          style={{ padding: "5px", fontSize: "12px", color: "#f0f4f9" }}
+        />
+        <div
+          onClick={() => newChat()}
+          className="new-chat"
+          data-tooltip-id="new-chat"
+          data-tooltip-content="New Chat"
+        >
+          <img src={assets.plus_icon} alt="" />
+          <Tooltip
+            id="new-chat"
+            place={"bottom"}
+            style={{ padding: "5px", fontSize: "12px", color: "#f0f4f9" }}
+          />
+          {!extended && <p>New Chat</p>}
         </div>
-        {extended ? (
+        {!extended && (
           <div className="recent">
             <p className="recent-title">Recent</p>
-            {prevPrompts.map((item, index) => (
-              <div
-                key={index} // Unique key for each item
-                onClick={() => loadPrompt(item)} // Load the clicked prompt
-                className="recent-entry"
-              >
-                <img src={assets.message_icon} alt="Message Icon" />
-                <p>{item.slice(0, 18)} ...</p>{" "}
-                {/* Show truncated prompt text */}
-              </div>
-            ))}
+            {prevPrompts.map((item, index) => {
+              return (
+                <div
+                  key={index}
+                  onClick={() => loadPrompt(item)}
+                  className="recent-entry"
+                >
+                  <img src={assets.message_icon} alt="" />
+                  <p>
+                    {item.slice(0, 24)} {item.length > 24 && "..."}
+                  </p>
+                </div>
+              );
+            })}
           </div>
-        ) : null}
+        )}
       </div>
       <div className="bottom">
         <div className="bottom-item recent-entry">
-          <img src={assets.question_icon} alt="Question Icon" />
-          {extended ? <p>Help</p> : null} {/* Show 'Help' text if extended */}
+          <img src={assets.question_icon} alt="" />
+          {!extended && <p>Help</p>}
         </div>
         <div className="bottom-item recent-entry">
-          <img src={assets.history_icon} alt="History Icon" />
-          {extended ? <p>Activity</p> : null}{" "}
-          {/* Show 'Activity' text if extended */}
+          <img src={assets.history_icon} alt="" />
+          {!extended && <p>Activity</p>}
         </div>
         <div className="bottom-item recent-entry">
-          <img src={assets.setting_icon} alt="Settings Icon" />
-          {extended ? <p>Settings</p> : null}{" "}
-          {/* Show 'Settings' text if extended */}
+          <img src={assets.setting_icon} alt="" />
+          {!extended && <p>Settings</p>}
         </div>
       </div>
     </div>
   );
 };
 
-export default Sidebar; // Export Sidebar component as default
+export default Sidebar;

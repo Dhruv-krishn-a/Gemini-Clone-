@@ -6,14 +6,15 @@ import setting_icon from "./setting_icon.png";
 import bulb_icon from "./bulb_icon.png";
 import compass_icon from "./compass_icon.png";
 import gallery_icon from "./gallery_icon.png";
+import image_icon from "./image.png";
 import mic_icon from "./mic_icon.png";
-import user_icon from "./user_icon.jpg";
+import user_icon from "./user_icon.png";
 import youtube_icon from "./youtube_icon.png";
 import message_icon from "./message_icon.png";
 import code_icon from "./code_icon.png";
 import send_icon from "./send_icon.png";
-import gemini_icon from "./gemini_icon.png";
-import github_icon from "./github_icon.png";
+import gemini_icon from "./gemini.svg";
+import gemini_gif from "./gemini.gif";
 
 export const assets = {
   history_icon,
@@ -31,5 +32,6 @@ export const assets = {
   code_icon,
   send_icon,
   gemini_icon,
-  github_icon,
+  image_icon,
+  gemini_gif,
 };

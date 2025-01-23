@@ -1,13 +1,14 @@
-import Sidebar from "./components/Sidebar/Sidebar"; // Importing the Sidebar component
-import Main from "./components/Main/Main"; // Importing the Main component
+import React from "react";
+import Sidebar from "./components/Sidebar/Sidebar.jsx";
+import Main from "./components/Main/Main.jsx";
 
-function App() {
+const App = () => {
   return (
     <>
-      <Sidebar /> {/* Rendering the Sidebar component */}
-      <Main /> {/* Rendering the Main component */}
+      <Sidebar />
+      <Main />
     </>
   );
-}
+};
 
-export default App; // Exporting the App component as default
+export default App;
