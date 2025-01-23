@@ -1,24 +1,24 @@
-# Gemini AI Clone with React
+# Gemini AI Clone using React
 
-Welcome to the Gemini AI Clone repository! This project allows you to create your own Gemini-inspired large language model (LLM) interface using React. Explore the capabilities of LLMs and build a user-friendly platform for interaction.
+Thank you for visiting the Gemini AI Clone project! This repository allows you to build a React-based interface inspired by Gemini, a large language model (LLM). Explore how LLMs work and design a smooth, intuitive experience for users.
 
 ## Demo
-[![See Demo](https://img.shields.io/badge/See-Demo-blue)](https://geminibypb.netlify.app/) 
-![Screenshot 1](https://github.com/priyanshuahir000/Gemini-Clone/blob/main/src/assets/screenshot.gif)
+[![View Demo](https://img.shields.io/badge/See-Demo-blue)](https://gemini-clone-r2j6wc73i-dhruv-krishn-as-projects.vercel.app/)  
+![Screenshot](src/assets/screenshot.gif)
 
-## Key Features
+## Main Features
 
-- **Text-based Interface:** Interact with a simulated LLM through a user-friendly text interface.
-- **API Integration (Optional):** Integrate with the Google Gemini API for real-time LLM interaction (subject to API terms and availability).
-- **Customizable:** Easily customize the UI and functionality to suit your needs.
+- **Interactive Text Interface:** Engage with a simulated LLM through a clean, simple text-based interface.
+- **Optional API Integration:** You can connect this project to the Google Gemini API for live LLM interactions (based on API availability and terms).
+- **Flexible and Customizable:** Modify both the interface and functionality to suit your preferences.
 
-## Getting Started
+## Setup Instructions
 
-Follow these steps to set up the project locally:
+To get the project running locally, follow these steps:
 
 1. **Clone the repository:**
     ```bash
-    git clone https://github.com/priyanshuahir000/Gemini-Clone
+    git clone https://github.com/Dhruv-krishn-a/Gemini-Clone-.git
     ```
 
 2. **Install dependencies:**
@@ -26,32 +26,31 @@ Follow these steps to set up the project locally:
     npm install
     ```
 
-3. **Start the development server:**
+3. **Launch the development server:**
     ```bash
-    npm run preview
+    npm run dev
     ```
 
-## Project Structure
+## Project Layout
 
-- **Components:** All React components are located in the `src/components` directory.
-- **Assets:** Static assets like images and stylesheets are in the `src/assets` directory.
-- **Utilities:** Helper functions and utilities are in the `src/utils` directory.
+- **Components:** All the React components are inside the `src/components` folder.
+- **Assets:** Any static files, like images and styles, are located in `src/assets`.
+- **Utilities:** Helper functions and utilities can be found in `src/utils`.
 
-## Additional Notes
+## Important Notes
 
 - This project is built using React.
-- The structure is organized to ensure a clean and maintainable codebase.
-- Building your own LLM interface offers a unique learning experience about LLMs and React development.
+- The code is structured to ensure clarity, ease of understanding, and maintainability.
+- Creating your own LLM interface offers a great opportunity to learn both LLM technology and React development.
 
-## Resources
+## Useful Links
 
-- **Google Gemini API Documentation (Optional):** If you are using the API, refer to the [Google Gemini API documentation](https://ai.google.dev/gemini-api/docs/get-started/tutorial?lang=web) for detailed instructions.
+- **Google Gemini API Documentation (Optional):** If you're integrating the API, check out the [Google Gemini API docs](https://ai.google.dev/gemini-api/docs/get-started/tutorial?lang=web) for comprehensive guidance.
 
-## Feedback
+## Contributions and Feedback
 
-We look forward to your feedback! Feel free to open an issue or submit a pull request with your improvements and suggestions.
+We value your input! Please feel free to open an issue or submit a pull request with your ideas for improvements.
 
 ---
 
-
-Thank you for using the Gemini AI Clone with React! Happy coding!
+Thanks for exploring the Gemini AI Clone with React! Enjoy coding!
